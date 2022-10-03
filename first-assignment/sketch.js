@@ -15,11 +15,12 @@ function preload() {
 }
 
 function setup() {
-  createCanvas("cookieStore.jpg");
+  createCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
   background(220);
+  image(backgroundImage, 0, 0, width, height  );
   image(cookieImage, 500, 150);
   
 }
