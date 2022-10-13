@@ -4,7 +4,7 @@
 // //
 // // Extra for Experts:
 // // - describe what you did to take this project "above and beyond"
-
+let x = 0;
 let cookieImage;
 let backgroundImage;
 let score = 0;
@@ -16,7 +16,7 @@ let finalBackgroundImage;
 function preload() {
   cookieImage = loadImage("RealCookie.png");
   backgroundImage = loadImage("BlackMarket.jpg");
-  secondBackgroundImage = loadImage("Cookiewagon.jpg");
+  secondBackgroundImage = loadImage("CookieWagon.jpg");
   thirdBackgroundImage = loadImage("cookievan.jpg");
   fourthBackgroundImage = loadImage("cookieStore.jpg");
   finalBackgroundImage = loadImage("cookieIndustry.jpg");
@@ -59,26 +59,20 @@ function scoreNumber() {
 
 
 function levelUp() {
-  if (0 <= score <= 999) {
+  if (score >= 0 && score <= 999) {
     image(backgroundImage, 0, 0, width, height);
   }
-  if (1000 <= score <= 2499) {
+  else if (score >= 1000 && score <= 2499) {
     image(secondBackgroundImage, 0, 0, width, height);
   }
-  if (2500 <= score <= 4499) {
+  else if (score >= 2500 && score <= 4499) {
     image(thirdBackgroundImage, 0, 0, width, height);
   }
-  if (4500 <= score < 7000) {
+  else if (score >= 4500 && score < 7000) {
     image(fourthBackgroundImage, 0, 0, width, height);
   }
-  if (score >= 7000) {
+  else {
     image(finalBackgroundImage, 0, 0, width, height);
   }
 }
 
-
-
-
-// function mousePressed() {
-//   console.log(mouseX, mouseY);
-// }
