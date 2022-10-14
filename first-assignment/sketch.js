@@ -3,7 +3,7 @@
 // // Sept 23, 2022
 // //
 // // Extra for Experts:
-// // - describe what you did to take this project "above and beyond"
+// // - couldnt find anything 
 let x = 0;
 let cookieImage;
 let backgroundImage;
