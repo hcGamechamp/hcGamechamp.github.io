@@ -40,7 +40,7 @@ function draw() {
 function changeScore() {
   if (mouseInCircle(656, 991, 260, 580)) {
     if (mouseIsPressed) {
-      score = score + 1;
+      score = score + 10;
     
     }
   }
@@ -61,18 +61,23 @@ function scoreNumber() {
 function levelUp() {
   if (score >= 0 && score <= 999) {
     image(backgroundImage, 0, 0, width, height);
+    text("Living on the Streets", 200, 100);
   }
   else if (score >= 1000 && score <= 2499) {
     image(secondBackgroundImage, 0, 0, width, height);
+    text("Pop up Cookie Stand", 150, 100);
   }
   else if (score >= 2500 && score <= 4499) {
     image(thirdBackgroundImage, 0, 0, width, height);
+    text("Moving Cookie Company", 200, 100);
   }
   else if (score >= 4500 && score < 7000) {
     image(fourthBackgroundImage, 0, 0, width, height);
+    text("In the Bakery", 200, 100);
   }
   else {
     image(finalBackgroundImage, 0, 0, width, height);
+    text("Unstoppable Cookie Industry", 900, 50);
   }
 }
 
