@@ -7,6 +7,12 @@ let cols = 40;
 let grid;
 let cellWidth;
 let cellHeight;
+let autoPlay = false;
+let thing;
+
+function preload() {
+  thing = loadJSON("thing.json");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -17,6 +23,9 @@ function setup() {
 
 function draw() {
   background(220);
+  if (autoPlay && frameCount % 3 === 0) {
+    grid = takeTurn(grid);
+  }
   displayGrid(grid);
 }
 
@@ -26,6 +35,12 @@ function keyPressed() {
   }
   if (key === " ") {
     grid = takeTurn(grid);
+  }
+  if (key === "a") {
+    autoPlay = !autoPlay;
+  }
+  if (key === "t"){
+    grid = thing;
   }
 }
 
@@ -76,10 +91,10 @@ function mousePressed() {
   let yPos = Math.floor(mouseY/cellHeight);
 
   if (grid[yPos][xPos] === 0) {
-    grid[yPos][xPos] === 1;
+    grid[yPos][xPos] = 1;
   }
   else if (grid[yPos][xPos] === 1) {
-    grid[yPos][xPos] === 0;
+    grid[yPos][xPos] = 0;
 
   }
 }
