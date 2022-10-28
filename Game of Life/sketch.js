@@ -79,7 +79,7 @@ function mousePressed() {
     grid[yPos][xPos] === 1;
   }
   else if (grid[yPos][xPos] === 1) {
-    grid[yPos][xPos] = 0;
+    grid[yPos][xPos] === 0;
 
   }
 }
