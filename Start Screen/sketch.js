@@ -29,6 +29,7 @@ function mousePressed() {
 function startScreen() {
   if (mouseInsideRect(400, 700, 400, 550)) {
     fill("gray");
+    console.log("HERE!");
   }
   else {
     fill("black");

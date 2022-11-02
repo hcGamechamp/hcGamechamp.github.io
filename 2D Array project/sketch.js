@@ -22,6 +22,10 @@ function draw() {
   }
 }
 
+function createButtons() {
+ rect()
+}
+
 function systemCall() {
   if (warmUpBotton === "run") {
     createRandom2dArray(3, 3);
