@@ -26,6 +26,7 @@ function createButtons() {
   if (state === "selection") {
     rect(300, 300, 700, 150);
     fill("black");
+    rect(800, 300,);
   }
 }
 
