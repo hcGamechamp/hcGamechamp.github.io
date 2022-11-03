@@ -23,7 +23,10 @@ function draw() {
 }
 
 function createButtons() {
- rect()
+  if (state === "selection") {
+    rect(300, 300, 700, 150);
+    fill("black");
+  }
 }
 
 function systemCall() {
