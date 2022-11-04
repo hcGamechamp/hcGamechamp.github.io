@@ -18,15 +18,49 @@ function setup() {
 
 function draw() {
   if (state === "selection") {
-    background("blue");
+    background("black");
+    createButtons();
   }
+  mousePressed();
 }
 
 function createButtons() {
   if (state === "selection") {
-    rect(300, 300, 700, 150);
-    fill("black");
-    rect(800, 300,);
+    fill("grey");
+    rect(300, 150, 300, 150); // warm up button
+    textSize(50);
+    fill("white");
+    text("Warm Up", 350, 250);
+
+    fill("grey");
+    rect(800, 150, 300, 150); // easy button
+    fill("white");
+    textSize(50);
+    text("Easy", 875, 250);
+    
+    fill("grey"); // average button
+    rect(300, 375, 300, 150);
+    fill("white");
+    textSize(50);
+    text("Average", 350, 475);
+
+    fill("grey"); // hard button
+    rect(800, 375, 300, 150);
+    fill("white");
+    textSize(50);
+    text("Hard", 875, 475);
+
+    fill("grey"); // master button
+    rect(300, 600, 300, 150);
+    fill("white");
+    textSize(50);
+    text("Master", 375, 700);
+
+    fill("grey"); // impossible button
+    rect(800, 600, 300, 150);
+    fill("white");
+    textSize(50);
+    text("Impossible", 835, 700);
   }
 }
 
@@ -84,7 +118,7 @@ function createRandom2dArray(cols, rows) {
 }
 
 function mousePressed() {
-  if (state === "selection" && mouseInsideRect(400, 700, 150, 550) || mouseInsideRect(700, 1000, 150, 550)) {
+  if (state === "selection" && createButtons()) {
     state = "run";
   }
   else if (state === "run") { 
