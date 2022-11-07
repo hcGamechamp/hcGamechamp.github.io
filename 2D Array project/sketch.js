@@ -26,37 +26,37 @@ function draw() {
 
 function createButtons() {
   if (state === "selection") {
-    fill("grey");
+    fill("violet");
     rect(300, 150, 300, 150); // warm up button
     textSize(50);
     fill("white");
     text("Warm Up", 350, 250);
 
-    fill("grey");
+    fill("green");
     rect(800, 150, 300, 150); // easy button
     fill("white");
     textSize(50);
     text("Easy", 875, 250);
     
-    fill("grey"); // average button
+    fill("orange"); // average button
     rect(300, 375, 300, 150);
     fill("white");
     textSize(50);
     text("Average", 350, 475);
 
-    fill("grey"); // hard button
+    fill("red"); // hard button
     rect(800, 375, 300, 150);
     fill("white");
     textSize(50);
     text("Hard", 875, 475);
 
-    fill("grey"); // master button
+    fill("blue"); // master button
     rect(300, 600, 300, 150);
     fill("white");
     textSize(50);
     text("Master", 375, 700);
 
-    fill("grey"); // impossible button
+    fill("purple"); // impossible button
     rect(800, 600, 300, 150);
     fill("white");
     textSize(50);
@@ -65,22 +65,22 @@ function createButtons() {
 }
 
 function systemCall() {
-  if (warmUpBotton === "run") {
+  if (state === "run" && mousePressed(300, 150, 300, 150)) {
     createRandom2dArray(3, 3);
   }
-  else if (easyButton === "run") {
+  else if (state === "run" && mousePressed(800, 150, 300, 150)) {
     createRandom2dArray(5, 5);
   }
-  else if (averageButton === "run") {
+  else if (state === "run" && mousePressed(300, 375, 300, 150)) {
     createRandom2dArray(8, 8);
   }
-  else if (hardButton === "run") {
+  else if (state === "run" && mousePressed(800, 375, 300, 150)) {
     createRandom2dArray(10, 10);
   }
-  else if (masterButton === "run") {
+  else if (state === "run" && mousePressed(300, 600, 300, 150)) {
     createRandom2dArray(15, 15);
   }
-  else if (impossibleButton === "run") {
+  else if (state === "run" && mousePressed(800, 600, 300, 150)) {
     createRandom2dArray(30,30);
   }
 }
@@ -118,8 +118,10 @@ function createRandom2dArray(cols, rows) {
 }
 
 function mousePressed() {
-  if (state === "selection" && createButtons()) {
-    state = "run";
+  if (state === "selection") {
+    if (mouseInsideRect(300, 150, 300, 150) && mousePressed() || mouseInsideRect(800, 150, 300, 150) && mousePressed() || mouseInsideRect(300, 375, 300, 150) && mousePressed || mouseInsideRect(800, 375, 300, 150) && mousePressed() || mouseInsideRect(300, 600, 300, 150) && mousePressed() || mouseInsideRect(800, 600, 300, 150) && mousePressed()) {
+      state = "run";
+    }
   }
   else if (state === "run") { 
     let xPos = Math.floor(mouseX/cellWidth);
