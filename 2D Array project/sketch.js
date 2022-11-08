@@ -11,17 +11,26 @@ let cols;
 let cellHeight;
 let cellWidth;
 let grid;
+let victoryMusic;
+
+function preload() {
+  victoryMusic = "Victory.mp3";
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  // victoryMusic.volume(0.2);
 }
 
 function draw() {
   if (state === "selection") {
     background("black");
     createButtons();
+    systemCall();
   }
-  mousePressed();
+  else if (state === "run") {
+    background("red");
+  }
 }
 
 function createButtons() {
@@ -65,23 +74,29 @@ function createButtons() {
 }
 
 function systemCall() {
-  if (state === "run" && mousePressed(300, 150, 300, 150)) {
+  if (state === "selection" && mouseInsideRect(300, 600, 150, 300) && mouseIsPressed) {
+    state = "run";
     createRandom2dArray(3, 3);
   }
-  else if (state === "run" && mousePressed(800, 150, 300, 150)) {
+  else if (state === "selection" && mouseInsideRect(800, 1100, 150, 300) && mouseIsPressed) {
+    state = "run";
     createRandom2dArray(5, 5);
   }
-  else if (state === "run" && mousePressed(300, 375, 300, 150)) {
+  else if (state === "selection" && mouseInsideRect(300, 375, 300, 375) && mouseIsPressed) {
+    state = "run";
     createRandom2dArray(8, 8);
   }
-  else if (state === "run" && mousePressed(800, 375, 300, 150)) {
+  else if (state === "selection" && mouseInsideRect(800, 375, 300, 150) && mouseIsPressed) {
+    state = "run";
     createRandom2dArray(10, 10);
   }
-  else if (state === "run" && mousePressed(300, 600, 300, 150)) {
+  else if (state === "selection" && mouseInsideRect(300, 600, 300, 150) && mouseIsPressed) {
+    state = "run";
     createRandom2dArray(15, 15);
   }
-  else if (state === "run" && mousePressed(800, 600, 300, 150)) {
-    createRandom2dArray(30,30);
+  else if (state === "selection" && mouseInsideRect(800, 600, 300, 150) && mouseIsPressed) {
+    state = "run";
+    createRandom2dArray(30, 30);
   }
 }
 
@@ -118,12 +133,7 @@ function createRandom2dArray(cols, rows) {
 }
 
 function mousePressed() {
-  if (state === "selection") {
-    if (mouseInsideRect(300, 150, 300, 150) && mousePressed() || mouseInsideRect(800, 150, 300, 150) && mousePressed() || mouseInsideRect(300, 375, 300, 150) && mousePressed || mouseInsideRect(800, 375, 300, 150) && mousePressed() || mouseInsideRect(300, 600, 300, 150) && mousePressed() || mouseInsideRect(800, 600, 300, 150) && mousePressed()) {
-      state = "run";
-    }
-  }
-  else if (state === "run") { 
+  if (state === "run") { 
     let xPos = Math.floor(mouseX/cellWidth);
     let yPos = Math.floor(mouseY/cellHeight);
 
