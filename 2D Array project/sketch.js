@@ -19,6 +19,7 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  
   // victoryMusic.volume(0.2);
 }
 
@@ -28,8 +29,24 @@ function draw() {
     createButtons();
     systemCall();
   }
-  else if (state === "run") {
+  else if (state === "warm up") {
     background("red");
+    displayGrid(grid);
+  }
+  else if (state === "easy") {
+    background("blue");
+  }
+  else if(state === "average") {
+    background("green");
+  }
+  else if (state === "hard") {
+    background("purple");
+  }
+  else if (state === "master") {
+    background("orange");
+  }
+  else if (state === "impossible") {
+    background("yellow");
   }
 }
 
@@ -74,28 +91,32 @@ function createButtons() {
 }
 
 function systemCall() {
-  if (state === "selection" && mouseInsideRect(300, 600, 150, 300) && mouseIsPressed) {
-    state = "run";
-    createRandom2dArray(3, 3);
+  if (state === "selection" && mouseInsideRect(300, 600, 150, 300) && mouseIsPressed) { // top left
+    state = "warm up";
+    grid = createRandom2dArray(3, 3);
+    rows = 3;
+    cols = 3;
+    cellWidth = width/cols;
+    cellHeight = height/rows;
   }
-  else if (state === "selection" && mouseInsideRect(800, 1100, 150, 300) && mouseIsPressed) {
-    state = "run";
+  else if (state === "selection" && mouseInsideRect(800, 1100, 150, 300) && mouseIsPressed) { // top right
+    state = "easy";
     createRandom2dArray(5, 5);
   }
-  else if (state === "selection" && mouseInsideRect(300, 375, 300, 375) && mouseIsPressed) {
-    state = "run";
+  else if (state === "selection" && mouseInsideRect(300, 600, 375, 525) && mouseIsPressed) { // left center
+    state = "average";
     createRandom2dArray(8, 8);
   }
-  else if (state === "selection" && mouseInsideRect(800, 375, 300, 150) && mouseIsPressed) {
-    state = "run";
+  else if (state === "selection" && mouseInsideRect(800, 1100, 375, 525) && mouseIsPressed) { // right center
+    state = "hard";
     createRandom2dArray(10, 10);
   }
-  else if (state === "selection" && mouseInsideRect(300, 600, 300, 150) && mouseIsPressed) {
-    state = "run";
+  else if (state === "selection" && mouseInsideRect(300, 600, 600, 750) && mouseIsPressed) { // bottom left
+    state = "master";
     createRandom2dArray(15, 15);
   }
-  else if (state === "selection" && mouseInsideRect(800, 600, 300, 150) && mouseIsPressed) {
-    state = "run";
+  else if (state === "selection" && mouseInsideRect(800, 1100, 600, 750) && mouseIsPressed) { // bottom right
+    state = "impossible";
     createRandom2dArray(30, 30);
   }
 }
@@ -145,8 +166,6 @@ function mousePressed() {
     }
   }
 }
-
-
 
 function mouseInsideRect(left, right, top, bottom) {
   return mouseX >= left && mouseX <= right && mouseY >= top && mouseY <= bottom;
