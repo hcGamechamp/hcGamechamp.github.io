@@ -34,19 +34,19 @@ function draw() {
     displayGrid(grid);
   }
   else if (state === "easy") {
-    background("blue");
+    displayGrid(grid);
   }
   else if(state === "average") {
-    background("green");
+    displayGrid(grid);
   }
   else if (state === "hard") {
-    background("purple");
+    displayGrid(grid);
   }
   else if (state === "master") {
-    background("orange");
+    displayGrid(grid);
   }
   else if (state === "impossible") {
-    background("yellow");
+    displayGrid(grid);
   }
 }
 
@@ -101,23 +101,43 @@ function systemCall() {
   }
   else if (state === "selection" && mouseInsideRect(800, 1100, 150, 300) && mouseIsPressed) { // top right
     state = "easy";
-    createRandom2dArray(5, 5);
+    grid = createRandom2dArray(5, 5);
+    rows = 5;
+    cols = 5;
+    cellWidth = width/cols;
+    cellHeight = height/rows;
   }
   else if (state === "selection" && mouseInsideRect(300, 600, 375, 525) && mouseIsPressed) { // left center
     state = "average";
     createRandom2dArray(8, 8);
+    rows = 8;
+    cols = 8;
+    cellWidth = width/cols;
+    cellHeight = height/rows;
   }
   else if (state === "selection" && mouseInsideRect(800, 1100, 375, 525) && mouseIsPressed) { // right center
     state = "hard";
     createRandom2dArray(10, 10);
+    rows = 10;
+    cols = 10;
+    cellWidth = width/cols;
+    cellHeight = height/rows;
   }
   else if (state === "selection" && mouseInsideRect(300, 600, 600, 750) && mouseIsPressed) { // bottom left
     state = "master";
     createRandom2dArray(15, 15);
+    rows = 15;
+    cols = 15;
+    cellWidth = width/cols;
+    cellHeight = height/rows;
   }
   else if (state === "selection" && mouseInsideRect(800, 1100, 600, 750) && mouseIsPressed) { // bottom right
     state = "impossible";
     createRandom2dArray(30, 30);
+    rows = 30;
+    cols = 30;
+    cellWidth = width/cols;
+    cellHeight = height/rows;
   }
 }
 
