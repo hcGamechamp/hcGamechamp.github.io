@@ -12,6 +12,9 @@ let cellHeight;
 let cellWidth;
 let grid;
 let victoryMusic;
+// let yPos;
+// let xPos;
+let timer = 0;
 
 function preload() {
   victoryMusic = "Victory.mp3";
@@ -30,23 +33,40 @@ function draw() {
     systemCall();
   }
   else if (state === "warm up") {
-    background("red");
     displayGrid(grid);
+    gameMechanic();
+    gameTimer();
   }
   else if (state === "easy") {
     displayGrid(grid);
+    gameMechanic();
+    gameTimer();
   }
   else if(state === "average") {
     displayGrid(grid);
+    gameMechanic();
+    gameTimer();
   }
   else if (state === "hard") {
     displayGrid(grid);
+    gameMechanic();
+    gameTimer();
   }
   else if (state === "master") {
     displayGrid(grid);
+    gameMechanic();
+    gameTimer();
   }
   else if (state === "impossible") {
     displayGrid(grid);
+    gameMechanic();
+    gameTimer();
+  }
+  else if (state === "gameOver") {
+    background("white");
+    textSize(50);
+    fill("black");
+    text("You Failed", windowWidth/2, windowHeight/2);
   }
 }
 
@@ -109,7 +129,7 @@ function systemCall() {
   }
   else if (state === "selection" && mouseInsideRect(300, 600, 375, 525) && mouseIsPressed) { // left center
     state = "average";
-    createRandom2dArray(8, 8);
+    grid = createRandom2dArray(8, 8);
     rows = 8;
     cols = 8;
     cellWidth = width/cols;
@@ -117,7 +137,7 @@ function systemCall() {
   }
   else if (state === "selection" && mouseInsideRect(800, 1100, 375, 525) && mouseIsPressed) { // right center
     state = "hard";
-    createRandom2dArray(10, 10);
+    grid = createRandom2dArray(10, 10);
     rows = 10;
     cols = 10;
     cellWidth = width/cols;
@@ -125,7 +145,7 @@ function systemCall() {
   }
   else if (state === "selection" && mouseInsideRect(300, 600, 600, 750) && mouseIsPressed) { // bottom left
     state = "master";
-    createRandom2dArray(15, 15);
+    grid = createRandom2dArray(15, 15);
     rows = 15;
     cols = 15;
     cellWidth = width/cols;
@@ -133,7 +153,7 @@ function systemCall() {
   }
   else if (state === "selection" && mouseInsideRect(800, 1100, 600, 750) && mouseIsPressed) { // bottom right
     state = "impossible";
-    createRandom2dArray(30, 30);
+    grid = createRandom2dArray(30, 30);
     rows = 30;
     cols = 30;
     cellWidth = width/cols;
@@ -173,20 +193,54 @@ function createRandom2dArray(cols, rows) {
   return emptyArray;
 }
 
-function mousePressed() {
-  if (state === "run") { 
+function gameMechanic() {
+  if ((state === "warm up" || state === "easy" || state === "average" || state === "hard" || state === "master" || state === "impossible") && mouseIsPressed) { 
     let xPos = Math.floor(mouseX/cellWidth);
     let yPos = Math.floor(mouseY/cellHeight);
 
     if (grid[yPos][xPos] === 0) {
       grid[yPos][xPos] = 1;
     }
-    else if (grid[yPos][xPos] === 1) {
-      grid[yPos][xPos] = 0;
-    }
+    // else if (grid[yPos][xPos] === 1) {
+    //   grid[yPos][xPos] = 0;
+    // }
   }
 }
 
 function mouseInsideRect(left, right, top, bottom) {
   return mouseX >= left && mouseX <= right && mouseY >= top && mouseY <= bottom;
+}
+
+function gameTimer() {
+  timer++;
+  if (state === "warm up") {
+    if (timer === 15*60) {
+      state = "gameOver";
+    }
+  }
+  else if (state === "easy") {
+    if (timer === 20*60) {
+      state = "gameOver";
+    }
+  }
+  else if (state === "average") {
+    if (timer === 30*60) {
+      state = "gameOver";
+    }
+  }
+  else if (state === "hard") {
+    if (timer === 35*60) {
+      state = "gameOver";
+    }
+  }
+  else if (state === "master") {
+    if (timer === 50*60) {
+      state = "gameOver";
+    }
+  }
+  else if (state === "impossible") {
+    if (timer === 50*60) {
+      state = "gameOver";
+    }
+  }
 }
