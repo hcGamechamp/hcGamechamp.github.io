@@ -1,9 +1,9 @@
-// 2D Array Project, Speed Test
+
 // Josh M
 // Started on Oct 28th, 2022
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - Nothing, didnt have time/just couldnt do it
 
 let state = "selection";
 let rows;
@@ -15,8 +15,9 @@ let victoryMusic;
 // let yPos;
 // let xPos;
 let timer = 0;
+let emptyArray = [];
 
-function preload() {
+function preload() { // attempted to make music for thw win, didnt have time
   victoryMusic = "Victory.mp3";
 }
 
@@ -26,7 +27,7 @@ function setup() {
   // victoryMusic.volume(0.2);
 }
 
-function draw() {
+function draw() { // overall calls each function per level of difficulty as well as end screens
   if (state === "selection") {
     background("black");
     createButtons();
@@ -36,31 +37,37 @@ function draw() {
     displayGrid(grid);
     gameMechanic();
     gameTimer();
+    gridCheck();
   }
   else if (state === "easy") {
     displayGrid(grid);
     gameMechanic();
     gameTimer();
+    gridCheck();
   }
   else if(state === "average") {
     displayGrid(grid);
     gameMechanic();
     gameTimer();
+    gridCheck();
   }
   else if (state === "hard") {
     displayGrid(grid);
     gameMechanic();
     gameTimer();
+    gridCheck();
   }
   else if (state === "master") {
     displayGrid(grid);
     gameMechanic();
     gameTimer();
+    gridCheck();
   }
   else if (state === "impossible") {
     displayGrid(grid);
     gameMechanic();
     gameTimer();
+    gridCheck();
   }
   else if (state === "gameOver") {
     background("white");
@@ -68,9 +75,15 @@ function draw() {
     fill("black");
     text("You Failed", windowWidth/2, windowHeight/2);
   }
+  else if (state === "win") {
+    background("black");
+    textSize(100);
+    fill("white")
+    text("You Win!", windowWidth/2, windowHeight/2);
+  }
 }
 
-function createButtons() {
+function createButtons() { // creates the buttons and gives them color
   if (state === "selection") {
     fill("violet");
     rect(300, 150, 300, 150); // warm up button
@@ -110,7 +123,7 @@ function createButtons() {
   }
 }
 
-function systemCall() {
+function systemCall() { // games the system for each button of difficulty, with custome options
   if (state === "selection" && mouseInsideRect(300, 600, 150, 300) && mouseIsPressed) { // top left
     state = "warm up";
     grid = createRandom2dArray(3, 3);
@@ -161,7 +174,7 @@ function systemCall() {
   }
 }
 
-function displayGrid(grid) {
+function displayGrid(grid) { // displays the pattern for the grid
   for (let y=0; y<rows; y++) {
     for (let x=0; x<cols; x++) {
       if (grid[y][x] === 0) {
@@ -177,8 +190,7 @@ function displayGrid(grid) {
 
 
 
-function createRandom2dArray(cols, rows) {
-  let emptyArray = [];
+function createRandom2dArray(cols, rows) { // makes random pattern for grid
   for (let y=0; y<rows; y++) {
     emptyArray.push([]);
     for (let x=0; x<cols; x++) {
@@ -193,7 +205,7 @@ function createRandom2dArray(cols, rows) {
   return emptyArray;
 }
 
-function gameMechanic() {
+function gameMechanic() { // allows box clicking, and changing color
   if ((state === "warm up" || state === "easy" || state === "average" || state === "hard" || state === "master" || state === "impossible") && mouseIsPressed) { 
     let xPos = Math.floor(mouseX/cellWidth);
     let yPos = Math.floor(mouseY/cellHeight);
@@ -207,29 +219,29 @@ function gameMechanic() {
   }
 }
 
-function mouseInsideRect(left, right, top, bottom) {
+function mouseInsideRect(left, right, top, bottom) { // inside the button sensor
   return mouseX >= left && mouseX <= right && mouseY >= top && mouseY <= bottom;
 }
 
-function gameTimer() {
+function gameTimer() { // makes timer limit for each level
   timer++;
   if (state === "warm up") {
-    if (timer === 15*60) {
+    if (timer === 5*60) {
       state = "gameOver";
     }
   }
   else if (state === "easy") {
-    if (timer === 20*60) {
+    if (timer === 9*60) {
       state = "gameOver";
     }
   }
   else if (state === "average") {
-    if (timer === 30*60) {
+    if (timer === 17*60) {
       state = "gameOver";
     }
   }
   else if (state === "hard") {
-    if (timer === 35*60) {
+    if (timer === 26*60) {
       state = "gameOver";
     }
   }
@@ -242,5 +254,25 @@ function gameTimer() {
     if (timer === 50*60) {
       state = "gameOver";
     }
+  }
+}
+
+function gridCheck() {  // checks if all are black
+  let totalCell = rows * cols;
+  let sum = 0;
+
+  for (let y=0; y<rows; y++) {
+    for (let x=0; x<cols; x++) {
+      if (emptyArray[y][x] === 1) {
+        sum ++;
+      }
+    }
+  }
+
+  if (sum === totalCell) {
+    state = "win";
+  } 
+  else {
+    state = state;
   }
 }
