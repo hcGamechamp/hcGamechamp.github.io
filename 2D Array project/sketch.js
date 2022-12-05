@@ -78,7 +78,7 @@ function draw() { // overall calls each function per level of difficulty as well
   else if (state === "win") {
     background("black");
     textSize(100);
-    fill("white")
+    fill("white");
     text("You Win!", windowWidth/2, windowHeight/2);
   }
 }
